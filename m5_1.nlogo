@@ -259,51 +259,14 @@ and get the energy from sources. Sources are part of the environment.
 
 ## HOW TO USE IT
 
-Click the SETUP button to setup initial persons and sources.
+Click the SETUP button to setup persons and sources.
 Click the GO button to start the simulation.
-
-The NUMBER slider controls the initial number of persons. The INITIAL-ENERGY slider sets the energy level of all the persons at the beginning.
-The GROWTH-RATE slider controls the rate at which the sources grows in patches.
-
-The model's default settings are such that at first the weeds are not present (weeds-grow-rate = 0, weeds-energy = 0).  This is so that you can look at the interaction of just rabbits and grass.  Once you have done this, you can start to add in the effect of weeds.
 
 ## THINGS TO NOTICE
 
-Watch the COUNT RABBITS monitor and the POPULATIONS plot to see how the rabbit population changes over time. At first, there is not enough grass for the rabbits, and many rabbits die. But that allows the grass to grow more freely, providing an abundance of food for the remaining rabbits. The rabbits gain energy and reproduce. The abundance of rabbits leads to a shortage of grass, and the cycle begins again.
-
-The rabbit population goes through a damped oscillation, eventually stabilizing in a narrow range. The total amount of grass also oscillates, out of phase with the rabbit population.
-
-These dual oscillations are characteristic of predator-prey systems. Such systems are usually described by a set of differential equations known as the Lotka-Volterra equations. NetLogo provides a new way of studying predatory-prey systems and other ecosystems.
-
 ## THINGS TO TRY
 
-Leaving other parameters alone, change the grass-grow-rate and let the system stabilize again.  Would you expect that there would now be more grass?  More rabbits?
-
-Change only the birth-threshold of the rabbits.  How does this affect the steady-state levels of rabbits and grass?
-
-With the current settings, the rabbit population goes through a damped oscillation. By changing the parameters, can you create an undamped oscillation? Or an unstable oscillation?
-
-In the current version, each rabbit has the same birth-threshold. What would happen if each rabbit had a different birth-threshold? What if the birth-threshold of each new rabbit was slightly different from the birth-threshold of its parent? How would the values for birth-threshold evolve over time?
-
-Now add weeds by making the sliders WEEDS-GROW-RATE the same as GRASS-GROW-RATE and WEEDS-ENERGY the same as GRASS-ENERGY.  Notice that the amount of grass and weeds is about the same.
-
-Now make grass and weeds grow at different rates.  What happens?
-
-What if the weeds grow at the same rate as grass, but they give less energy to the rabbits when eaten (WEEDS-ENERGY is less than GRASS-ENERGY)?
-
-Think of other ways that two plant species might differ and try them out to see what happens to their relative populations.  For example, what if a weed could grow where there was already grass, but grass couldn't grow where there was a weed?  What if the rabbits preferred the plant that gave them the most energy?
-
-Run the model for a bit, then suddenly change the birth threshold to zero.  What happens?
-
 ## NETLOGO FEATURES
-
-Notice that every black patch has a random chance of growing grass or
-weeds each turn, using the rule:
-
-    if random-float 1000 < weeds-grow-rate
-      [ set pcolor violet ]
-    if random-float 1000 < grass-grow-rate
-      [ set pcolor green ]
 
 ## RELATED MODELS
 
@@ -318,7 +281,7 @@ If you mention this model or the NetLogo software in a publication, we ask that 
 
 For the model itself:
 
-* Batta, E. (2016).  NetLogo sources-persons survival simple model.  http://ccl.northwestern.edu/netlogo/models/RabbitsGrassWeeds.  Centro de Ciencias de la
+* Batta, E. (2016).  NetLogo sources-persons survival simple model.  Centro de Ciencias de la
 Complejidad, Universidad Nacional Autónoma de México, Cd de México, MX.
 
 Please cite the NetLogo software as:
