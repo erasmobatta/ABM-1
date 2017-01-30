@@ -7,8 +7,7 @@ globals[
   last-mean
   current-population ;;parameters about length of population
   low-fraction
-  test
-  vision-th
+  vision
 
 ]
 breed [persons person]
@@ -28,8 +27,7 @@ to setup
   set-default-shape sources "plant"
   set initial-population 300
   set energy-zero 10
-  set test 1.4 + random-float 0.8
-  set vision-th  (180 / pi) * base-area / (test ^ 2)
+  set vision sqrt(base-area / pi)
   create-persons (initial-population / 2) [
     set consume 1.5
     set color red
@@ -79,7 +77,7 @@ to grow-sources
 
 end
 to move  ;; person procedure
-  right (-1 * vision-th / 2) + random (vision-th / 2)
+  right random 360
   forward consume
   set energy energy - consume - basal-met
 
@@ -88,7 +86,7 @@ end
 to eat
 
       let increment 0
-      ask sources in-cone (test + consume / 2) vision-th[
+      ask sources in-radius (vision + consume) [
         set increment increment + source-energy
         die
         ]
