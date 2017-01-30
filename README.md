@@ -12,7 +12,7 @@ ENVIRONMENT
 
 AGENTS
 
-* Agents permorms three actions: eat, move and reproduce themselves
+* Agents performs three actions: eat, move and reproduce themselves
 * They eat every source in their cone of vision
 * They move according an internal variable
 * Everyone spend at least a minimum amount of energy (basal metabolism)
