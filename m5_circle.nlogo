@@ -8,13 +8,14 @@ globals[
   current-population ;;parameters about length of population
   low-fraction
   vision
-
+  av-lifetime
 ]
 breed [persons person]
 breed [sources source]
 persons-own [
   energy
   consume
+  age
   ]
 
 sources-own[
@@ -33,12 +34,14 @@ to setup
     set color red
     setxy random-xcor random-ycor
     set energy energy-zero
+    set age 0
   ]
    create-persons (initial-population / 2) [
     set consume 2
     set color blue
     setxy random-xcor random-ycor
     set energy energy-zero
+    set age 0
   ]
   ask patches [
     set pcolor white
@@ -59,6 +62,7 @@ to go
   [ move
     eat
     reproduce
+    aging
     death ]
   set-globals
   tick
@@ -99,8 +103,12 @@ to reproduce     ;; person procedure
   ;; give birth to a new person, but it takes lots of energy
   if energy > energy-zero * 2
     [ set energy energy / 2
-      hatch 1
+      hatch 1 [set age 0]
       ]
+end
+
+to aging
+  set age age + 1
 end
 
 to death     ;; person procedure
@@ -116,10 +124,11 @@ to set-globals ;; observer procedure
     set current-population count turtles
     set mean-population (last-mean * ticks + current-population)/(ticks + 1)
     set last-mean mean-population
-    set low-fraction count persons with [consume = 1.5]/ count persons
+
 
   ]
-
+  set av-lifetime mean [age] of persons
+  set low-fraction count persons with [consume = 1.5]/ count persons
 end
 
 
@@ -193,7 +202,7 @@ PLOT
 175
 213
 325
-fast proportion
+low fraction
 NIL
 NIL
 0.0
@@ -204,18 +213,7 @@ true
 false
 "" ""
 PENS
-"fast" 1.0 0 -2674135 true "" "plot count persons with [color = red]/ count persons"
-
-MONITOR
-32
-329
-89
-374
-low p
-count persons with [consume = 1.5]/ count persons
-3
-1
-11
+"fast" 1.0 0 -2674135 true "" "plot low-fraction"
 
 SLIDER
 34
@@ -241,11 +239,29 @@ base-area
 base-area
 1
 15
-15
+4
 1
 1
 NIL
 HORIZONTAL
+
+PLOT
+11
+330
+211
+480
+average lifetime
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot av-lifetime"
 
 @#$#@#$#@
 ## WHAT IS IT?
