@@ -6,15 +6,17 @@ globals[
   mean-population
   last-mean
   current-population ;;parameters about length of population
-  low-fraction
   vision
   av-lifetime
+  av-reservoir
+  av-heritage
 ]
 breed [persons person]
 breed [sources source]
 persons-own [
   energy
-  consume
+  reservoir
+  heritage
   age
   ]
 
@@ -30,19 +32,14 @@ to setup
   set energy-zero 10
   set vision sqrt(base-area / pi)
   create-persons (initial-population / 2) [
-    set consume 1.5
+    set reservoir random-float 1.0
+    set heritage random-float energy-zero
     set color red
     setxy random-xcor random-ycor
     set energy energy-zero
     set age 0
   ]
-   create-persons (initial-population / 2) [
-    set consume 2
-    set color blue
-    setxy random-xcor random-ycor
-    set energy energy-zero
-    set age 0
-  ]
+
   ask patches [
     set pcolor white
      sprout-sources 1 [
@@ -82,15 +79,15 @@ to grow-sources
 end
 to move  ;; person procedure
   right random 360
-  forward consume
-  set energy energy - consume - basal-met
+  forward (1 - reservoir) * (energy - basal-met)
+  set energy reservoir * (energy - basal-met)
 
 end
 
 to eat
 
       let increment 0
-      ask sources in-radius (vision + consume) [
+      ask sources in-radius (vision + (1 - reservoir)) [
         set increment increment + source-energy
         die
         ]
@@ -101,7 +98,7 @@ end
 
 to reproduce     ;; person procedure
   ;; give birth to a new person, but it takes lots of energy
-  if energy > energy-zero * 2
+  if energy > (energy-zero + heritage) * 2
     [ set energy energy / 2
       hatch 1 [set age 0]
       ]
@@ -114,8 +111,6 @@ end
 to death     ;; person procedure
   ;; die if you run out of energy
   if energy < 0 [ die ]
-  ;; or if your metabolism is less than 1 (arbitrary threshold)
-  if consume < 1 [ die ]
 end
 
 to set-globals ;; observer procedure
@@ -128,7 +123,8 @@ to set-globals ;; observer procedure
 
   ]
   set av-lifetime mean [age] of persons
-  set low-fraction count persons with [consume = 1.5]/ count persons
+  set av-reservoir mean [reservoir] of persons
+  set av-heritage mean [heritage] of persons
 end
 
 
@@ -202,7 +198,7 @@ PLOT
 175
 213
 325
-low fraction
+mean features
 NIL
 NIL
 0.0
@@ -213,7 +209,7 @@ true
 false
 "" ""
 PENS
-"fast" 1.0 0 -2674135 true "" "plot low-fraction"
+"reservoir" 1.0 0 -2674135 true "" "plot av-reservoir"
 
 SLIDER
 34
@@ -224,7 +220,7 @@ basal-met
 basal-met
 1
 10
-1
+3
 1
 1
 NIL
@@ -239,7 +235,7 @@ base-area
 base-area
 1
 15
-4
+10
 1
 1
 NIL
@@ -250,7 +246,7 @@ PLOT
 330
 211
 480
-average lifetime
+average features
 NIL
 NIL
 0.0
@@ -261,7 +257,8 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot av-lifetime"
+"lifetime" 1.0 0 -16777216 true "" "plot av-lifetime"
+"heritage" 1.0 0 -955883 true "" "plot av-heritage"
 
 @#$#@#$#@
 ## WHAT IS IT?

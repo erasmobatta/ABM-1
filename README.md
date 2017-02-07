@@ -12,10 +12,11 @@ ENVIRONMENT
 
 AGENTS
 
-* Agents performs three actions: eat, move and reproduce themselves
-* They eat every source in their cone of vision
-* They move according an internal variable
-* Everyone spend at least a minimum amount of energy (basal metabolism)
-* When they acumulate an specific amount of energy, they reproduce themselves by division.
+* Agents performs three actions: eat, move and reproduce themselves.
+* They eat every source in a circle defined by base-area.
+* They move according an internal variable.
+* Everyone spend at least a minimum amount of energy (basal metabolism).
+* When they acumulate an specific amount of energy, they reproduce themselves 
+  by division.
 * When reproducing, agent divides its energy.
 
