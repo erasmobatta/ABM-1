@@ -9,6 +9,9 @@ globals[
   low-fraction
   vision
   av-lifetime
+
+  basal-met
+  base-area
 ]
 breed [persons person]
 breed [sources source]
@@ -28,6 +31,8 @@ to setup
   set-default-shape sources "plant"
   set initial-population 300
   set energy-zero 10
+  set basal-met 1 + random-float 3
+  set base-area 4 + random-float 8
   set vision sqrt(base-area / pi)
   create-persons (initial-population / 2) [
     set consume 1.5
@@ -214,36 +219,6 @@ false
 "" ""
 PENS
 "fast" 1.0 0 -2674135 true "" "plot low-fraction"
-
-SLIDER
-34
-56
-206
-89
-basal-met
-basal-met
-1
-10
-3
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-34
-99
-206
-132
-base-area
-base-area
-1
-15
-13
-1
-1
-NIL
-HORIZONTAL
 
 PLOT
 11
@@ -651,6 +626,17 @@ NetLogo 5.3.1
     <metric>low-fraction</metric>
     <steppedValueSet variable="basal-met" first="1" step="0.5" last="3"/>
     <steppedValueSet variable="base-area" first="4" step="1" last="13"/>
+  </experiment>
+  <experiment name="bMet-bArea-circle2" repetitions="3000" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>count persons</metric>
+    <metric>basal-met</metric>
+    <metric>base-area</metric>
+    <metric>mean-population</metric>
+    <metric>av-lifetime</metric>
+    <metric>low-fraction</metric>
   </experiment>
 </experiments>
 @#$#@#$#@
