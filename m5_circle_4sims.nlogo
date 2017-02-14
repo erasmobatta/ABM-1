@@ -52,7 +52,7 @@ to setup
     set pcolor white
      sprout-sources 1 [
             set color green
-            set source-energy 1
+            set source-energy init-source-energy
             ]
     ]
 
@@ -78,7 +78,7 @@ to grow-sources
 
        sprout-sources 1 [
             set color green
-            set source-energy 1
+            set source-energy init-source-energy
 
         ]
 
@@ -237,6 +237,21 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot av-lifetime"
+
+SLIDER
+9
+119
+181
+152
+init-source-energy
+init-source-energy
+0
+1
+0.15
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
