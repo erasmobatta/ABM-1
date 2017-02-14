@@ -124,9 +124,9 @@ to death     ;; person procedure
 end
 
 to set-globals ;; observer procedure
-  if ticks = 99 [set last-mean count turtles]
+  if ticks = 99 [set last-mean count persons]
   if ticks > 99 [
-    set current-population count turtles
+    set current-population count persons
     set mean-population (last-mean * ticks + current-population)/(ticks + 1)
     set last-mean mean-population
 
@@ -652,6 +652,20 @@ NetLogo 5.3.1
     <metric>mean-population</metric>
     <metric>av-lifetime</metric>
     <metric>low-fraction</metric>
+  </experiment>
+  <experiment name="bMet-bArea-iSE015" repetitions="3000" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>count persons</metric>
+    <metric>basal-met</metric>
+    <metric>base-area</metric>
+    <metric>mean-population</metric>
+    <metric>av-lifetime</metric>
+    <metric>low-fraction</metric>
+    <enumeratedValueSet variable="init-source-energy">
+      <value value="0.15"/>
+    </enumeratedValueSet>
   </experiment>
 </experiments>
 @#$#@#$#@
