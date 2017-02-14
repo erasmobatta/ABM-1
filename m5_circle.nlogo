@@ -47,7 +47,7 @@ to setup
     set pcolor white
      sprout-sources 1 [
             set color green
-            set source-energy 1
+            set source-energy init-source-energy
             ]
     ]
 
@@ -73,7 +73,7 @@ to grow-sources
 
        sprout-sources 1 [
             set color green
-            set source-energy 1
+            set source-energy init-source-energy
 
         ]
 
@@ -119,9 +119,9 @@ to death     ;; person procedure
 end
 
 to set-globals ;; observer procedure
-  if ticks = 99 [set last-mean count turtles]
+  if ticks = 99 [set last-mean count persons]
   if ticks > 99 [
-    set current-population count turtles
+    set current-population count persons
     set mean-population (last-mean * ticks + current-population)/(ticks + 1)
     set last-mean mean-population
 
@@ -224,22 +224,22 @@ basal-met
 basal-met
 1
 10
-3
+1
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-34
-99
-206
-132
+35
+90
+207
+123
 base-area
 base-area
 1
 15
-13
+1
 1
 1
 NIL
@@ -262,6 +262,21 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot av-lifetime"
+
+SLIDER
+36
+124
+208
+157
+init-source-energy
+init-source-energy
+0
+1
+0.15
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
